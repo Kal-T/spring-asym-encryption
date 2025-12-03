@@ -1,11 +1,32 @@
 package com.ikal.app.user;
 
+import com.ikal.app.auth.request.RegistrationRequest;
 import com.ikal.app.user.request.ProfileUpdateRequest;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserMapper {
+    private final PasswordEncoder passwordEncoder;
+
+    public User toUser(final RegistrationRequest request) {
+        return User.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .phoneNumber(request.getPhoneNumber())
+                .password(this.passwordEncoder.encode(request.getPassword()))
+                .enabled(true)
+                .locked(false)
+                .credentialsExpired(false)
+                .emailVerified(false)
+                .phoneVerified(false)
+                .build();
+    }
+
     public void mergeUserInfo(User user, ProfileUpdateRequest request) {
         if (StringUtils.isNotBlank(request.getFirstName()) && !user.getFirstName()
                 .equals(request.getFirstName())) {

@@ -1,4 +1,4 @@
-package com.ikal.app.user.exception;
+package com.ikal.app.exception;
 
 import lombok.Getter;
 

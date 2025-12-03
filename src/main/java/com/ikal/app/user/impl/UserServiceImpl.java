@@ -4,7 +4,7 @@ import com.ikal.app.user.User;
 import com.ikal.app.user.UserMapper;
 import com.ikal.app.user.UserRepository;
 import com.ikal.app.user.UserService;
-import com.ikal.app.user.exception.BusinessException;
+import com.ikal.app.exception.BusinessException;
 import com.ikal.app.user.request.ChangePasswordRequest;
 import com.ikal.app.user.request.ProfileUpdateRequest;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +14,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import static com.ikal.app.user.exception.ErrorCode.ACCOUNT_ALREADY_DEACTIVATED;
-import static com.ikal.app.user.exception.ErrorCode.ACCOUNT_ALREADY_REACTIVATED;
-import static com.ikal.app.user.exception.ErrorCode.CHANGE_PASSWORD_MISMATCH;
-import static com.ikal.app.user.exception.ErrorCode.INVALID_CURRENT_PASSWORD;
-import static com.ikal.app.user.exception.ErrorCode.USER_NOT_FOUND;
+import static com.ikal.app.exception.ErrorCode.ACCOUNT_ALREADY_DEACTIVATED;
+import static com.ikal.app.exception.ErrorCode.ACCOUNT_ALREADY_REACTIVATED;
+import static com.ikal.app.exception.ErrorCode.CHANGE_PASSWORD_MISMATCH;
+import static com.ikal.app.exception.ErrorCode.INVALID_CURRENT_PASSWORD;
+import static com.ikal.app.exception.ErrorCode.USER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

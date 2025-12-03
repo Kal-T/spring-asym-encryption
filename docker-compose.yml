@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: spring_sec_asymmetric
-    image: 17.5
+    image: postgres:17.5
     environment:
       POSTGRES_USER: username
       POSTGRES_PASSWORD: password
