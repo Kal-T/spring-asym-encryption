@@ -1,6 +1,7 @@
 package com.ikal.app.user;
 
 import com.ikal.app.role.Role;
+import com.ikal.app.todo.Todo;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -77,6 +78,9 @@ public class User implements UserDetails {
     )
     private List<Role> roles;
 
+    @OneToMany(mappedBy = "user")
+    private List<Todo> todos;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (CollectionUtils.isEmpty(this.roles)) {
@@ -85,6 +89,18 @@ public class User implements UserDetails {
         return this.roles.stream()
                 .map(r -> new SimpleGrantedAuthority(r.getName()))
                 .toList();
+    }
+
+    public void addRole(final Role role) {
+        this.roles.add(role);
+        role.getUsers()
+                .add(this);
+    }
+
+    public void removeRole(final Role role) {
+        this.roles.remove(role);
+        role.getUsers()
+                .remove(this);
     }
 
     @Override
